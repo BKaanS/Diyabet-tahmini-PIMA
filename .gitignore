@@ -1,0 +1,43 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Test and tooling
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# Environment files
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# ML artifacts (keep folder, ignore generated files)
+makine_ogrenmesi/artifactler/*
+!makine_ogrenmesi/artifactler/.gitkeep
+
+# Data folders (keep structure)
+makine_ogrenmesi/veri/ham/*
+!makine_ogrenmesi/veri/ham/.gitkeep
+makine_ogrenmesi/veri/ara/*
+!makine_ogrenmesi/veri/ara/.gitkeep
+makine_ogrenmesi/veri/islenmis/*
+!makine_ogrenmesi/veri/islenmis/.gitkeep
