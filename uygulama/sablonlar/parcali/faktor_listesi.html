@@ -1,0 +1,31 @@
+{% set ozellik_adlari = {
+  "glucose": "Glikoz",
+  "blood_pressure": "Kan Basıncı",
+  "skin_thickness": "Cilt Kalınlığı",
+  "insulin": "İnsülin",
+  "bmi": "Vücut Kitle İndeksi",
+  "diabetes_pedigree_function": "Soyağacı Fonksiyonu",
+  "pregnancies": "Gebelik Sayısı",
+  "age": "Yaş"
+} %}
+{% set yon_adlari = {"arttirici": "Artırıcı", "azaltici": "Azaltıcı"} %}
+
+<section class="faktor-karti">
+  <h3>En Etkili Faktörler (Top 3)</h3>
+  {% if sonuc.top_faktorler and sonuc.top_faktorler|length > 0 %}
+  <ul class="faktor-listesi">
+    {% for faktor in sonuc.top_faktorler %}
+    <li>
+      <span class="sira-balonu">{{ loop.index }}</span>
+      <div class="faktor-icerik">
+        <strong>{{ ozellik_adlari.get(faktor.ozellik, faktor.ozellik) }}</strong>
+        <span>Değer: {{ faktor.ozellik_degeri }}</span>
+        <span>Katkı: {{ '%.4f'|format(faktor.shap_katkisi) }} ({{ yon_adlari.get(faktor.yon, faktor.yon) }})</span>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p class="bos-durum">Bu aşamada faktör açıklamaları henüz eklenmedi.</p>
+  {% endif %}
+</section>

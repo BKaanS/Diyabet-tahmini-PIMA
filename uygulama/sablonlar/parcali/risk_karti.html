@@ -1,0 +1,62 @@
+{% set risk_metin = {"dusuk": "Düşük", "orta": "Orta", "yuksek": "Yüksek"} %}
+{% set oran_yuzde = '%.1f'|format(sonuc.olasilik * 100) %}
+{% set sonuc_renk = {"dusuk": "#16a34a", "orta": "#d97706", "yuksek": "#dc2626"} %}
+
+<section class="sonuc-ust">
+  <h3>Tahmin Özeti</h3>
+  <span class="risk-rozet risk-{{ sonuc.risk_kategorisi }}">{{ risk_metin.get(sonuc.risk_kategorisi, "Bilinmiyor") }} Risk</span>
+</section>
+
+<section class="ozet-grid">
+  <div class="ozet-sol">
+    <section class="risk-karti">
+      <div class="ozet-kutusu">
+        <p class="etiket">Risk Yüzdesi</p>
+        <p class="deger">%{{ oran_yuzde }}</p>
+      </div>
+      <div class="ozet-kutusu">
+        <p class="etiket">Risk Seviyesi</p>
+        <p class="deger buyuk">{{ risk_metin.get(sonuc.risk_kategorisi, "Bilinmiyor") }}</p>
+      </div>
+      <div class="ozet-kutusu">
+        <p class="etiket">İkili Tahmin</p>
+        <p class="deger">{{ sonuc.sinif }}</p>
+      </div>
+    </section>
+  </div>
+
+  <div class="ozet-sag">
+    <section class="grafik-karti">
+      <div class="pie-blok">
+        <h4>Risk Yüzdesi Grafiği</h4>
+        <div class="pie-grafik"
+          style="--oran-yuzde: {{ oran_yuzde }}%; --sonuc-renk: {{ sonuc_renk.get(sonuc.risk_kategorisi, '#3999ac') }};">
+          <div class="pie-merkez">
+            <strong>%{{ oran_yuzde }}</strong>
+            <span>{{ risk_metin.get(sonuc.risk_kategorisi, "Bilinmiyor") }} risk</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cizgi-blok">
+        <h4>Doğrusal Risk Barı</h4>
+        <div class="cizgi-etiketler">
+          <span>Düşük</span>
+          <span>Orta</span>
+          <span>Yüksek</span>
+        </div>
+        <div class="risk-cizgi"
+          style="--oran-yuzde: {{ oran_yuzde }}%; --sonuc-renk: {{ sonuc_renk.get(sonuc.risk_kategorisi, '#3999ac') }};">
+          <div class="risk-segment dusuk"></div>
+          <div class="risk-segment orta"></div>
+          <div class="risk-segment yuksek"></div>
+          <div class="risk-dolgu"></div>
+          <div class="risk-gosterge"></div>
+        </div>
+        <p class="cizgi-notu">
+          Gösterge, modelin tahmin ettiği risk olasılığının doğrusal konumunu gösterir.
+        </p>
+      </div>
+    </section>
+  </div>
+</section>
