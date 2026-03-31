@@ -28,7 +28,6 @@ Bu proje, kadin bireylerde diyabet riski icin makine ogrenmesi destekli bir tahm
 ### 2.2 Ortam kurulumu
 
 ```bash
-cd /Users/beratkaanseven/Desktop/VSCoding/Diyabet_Projesi/diyabet_risk_tahmini
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
@@ -63,7 +62,6 @@ Dosya adinin `diabetes.csv` olmasi ve zorunlu kolonlari icermesi gerekir.
 ## 4. Uygulamayi Calistirma
 
 ```bash
-cd /Users/beratkaanseven/Desktop/VSCoding/Diyabet_Projesi/diyabet_risk_tahmini
 python3 -m uvicorn uygulama.main:app --host 127.0.0.1 --port 8000 --reload
 ```
 
@@ -110,7 +108,6 @@ Beklenen donus alanlari:
 ## 6. Testleri Calistirma
 
 ```bash
-cd /Users/beratkaanseven/Desktop/VSCoding/Diyabet_Projesi/diyabet_risk_tahmini
 pytest -q
 ```
 
@@ -121,7 +118,6 @@ Beklenen: tum testler `passed`.
 ### 7.1 Egitim ozeti uretme
 
 ```bash
-cd /Users/beratkaanseven/Desktop/VSCoding/Diyabet_Projesi/diyabet_risk_tahmini
 python3 betikler/egitimi_calistir.py
 ```
 
@@ -132,7 +128,6 @@ Cikti dosyasi:
 ### 7.2 Model degerlendirme ozeti uretme
 
 ```bash
-cd /Users/beratkaanseven/Desktop/VSCoding/Diyabet_Projesi/diyabet_risk_tahmini
 python3 betikler/degerlendirmeyi_calistir.py
 ```
 
@@ -193,7 +188,6 @@ Cozum:
 ## 10. Son Teknik Kontrol Komutlari
 
 ```bash
-cd /Users/beratkaanseven/Desktop/VSCoding/Diyabet_Projesi/diyabet_risk_tahmini
 pytest -q
 python3 -m compileall uygulama makine_ogrenmesi testler betikler
 ```
