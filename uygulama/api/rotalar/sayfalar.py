@@ -34,11 +34,26 @@ async def sonuc_sayfasi(request: Request) -> HTMLResponse:
 
     try:
         girdi = TahminGirdisi(**ham_form)
-        sonuc = TahminCiktisi(**tek_ornek_tahmin_uret(girdi))
+        ham_sonuc = tek_ornek_tahmin_uret(girdi, include_tum_faktorler=True)
+        tum_faktorler = ham_sonuc.pop("tum_faktorler", [])
+        if not tum_faktorler:
+            tum_faktorler = list(ham_sonuc.get("top_faktorler", []))
+        max_mutlak_shap = max(
+            (abs(float(faktor.get("shap_katkisi", 0.0))) for faktor in tum_faktorler),
+            default=1.0,
+        )
+        if max_mutlak_shap == 0:
+            max_mutlak_shap = 1.0
+
+        sonuc = TahminCiktisi(**ham_sonuc)
         return templates.TemplateResponse(
             request=request,
             name="sonuc.html",
-            context={"sonuc": sonuc},
+            context={
+                "sonuc": sonuc,
+                "tum_faktorler": tum_faktorler,
+                "max_mutlak_shap": max_mutlak_shap,
+            },
         )
     except ValidationError as hata:
         return templates.TemplateResponse(

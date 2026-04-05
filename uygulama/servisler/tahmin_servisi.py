@@ -56,6 +56,7 @@ def artifact_onbellegini_temizle() -> None:
 def tek_ornek_tahmin_uret(
     girdi: TahminGirdisi | dict[str, float | int],
     artifact_klasoru: str | Path | None = None,
+    include_tum_faktorler: bool = False,
 ) -> dict[str, Any]:
     """Tek bir girdi icin olasilik, sinif, risk ve aciklama uretir."""
     artifactler = artifactleri_yukle_servisi(artifact_klasoru)
@@ -75,19 +76,29 @@ def tek_ornek_tahmin_uret(
         x_ornek=x_ornek,
         top_n=3,
     )
+    tum_faktorler: list[dict[str, Any]] = []
+    if include_tum_faktorler:
+        tum_faktorler = _guvenli_top_faktorleri_uret(
+            model=pipeline,
+            x_ornek=x_ornek,
+            top_n=max(3, x_ornek.shape[1]),
+        )
     kisa_aciklama = kisa_aciklama_uret(
         risk_kategorisi=risk_ozeti["risk_kategorisi"],
         olasilik=kalibre_olasilik,
         top_faktorler=top_faktorler,
     )
 
-    return {
+    sonuc = {
         "olasilik": float(kalibre_olasilik),
         "sinif": int(risk_ozeti["sinif"]),
         "risk_kategorisi": str(risk_ozeti["risk_kategorisi"]),
         "top_faktorler": top_faktorler,
         "kisa_aciklama": kisa_aciklama,
     }
+    if include_tum_faktorler:
+        sonuc["tum_faktorler"] = tum_faktorler
+    return sonuc
 
 
 def _girdiyi_dict_yap(girdi: TahminGirdisi | dict[str, float | int]) -> dict[str, float | int]:

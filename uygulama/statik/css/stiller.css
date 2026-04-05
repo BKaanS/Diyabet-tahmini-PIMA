@@ -110,6 +110,22 @@ body {
   font-weight: 700;
 }
 
+.ekip-imza {
+  font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+  text-transform: none;
+  letter-spacing: 0.01em;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.ozet-etiket {
+  font-family: "Nunito Sans", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  text-transform: none;
+  letter-spacing: 0.01em;
+  font-size: 0.82rem;
+  color: #1e3a4d;
+}
+
 .alt-metin {
   margin: 0;
   color: var(--ikincil-metin);
@@ -483,6 +499,115 @@ body {
   margin-top: 0;
 }
 
+.faktor-baslik-satir {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+}
+
+.faktor-baslik-satir h3 {
+  margin: 0;
+}
+
+.tum-faktor-detay {
+  width: 100%;
+}
+
+.tum-faktor-detay > summary {
+  list-style: none;
+  width: fit-content;
+  margin-left: auto;
+  cursor: pointer;
+}
+
+.tum-faktor-detay > summary::-webkit-details-marker {
+  display: none;
+}
+
+.tum-faktor-buton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.6rem;
+  padding: 0.45rem 0.75rem;
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+  color: #0f172a;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+.tum-faktor-buton:hover {
+  background: #f1f5f9;
+}
+
+.tum-faktor-panel {
+  margin-top: 0.7rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.7rem;
+  padding: 0.75rem;
+  background: #fbfdff;
+}
+
+.tum-faktor-panel h4 {
+  margin: 0 0 0.55rem;
+  font-size: 0.86rem;
+}
+
+.shap-grafik {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.shap-satir {
+  display: grid;
+  grid-template-columns: minmax(130px, 1fr) minmax(150px, 2fr) auto;
+  gap: 0.55rem;
+  align-items: center;
+}
+
+.shap-ozellik {
+  font-size: 0.8rem;
+  color: #334155;
+  font-weight: 600;
+}
+
+.shap-cubuk-zemin {
+  height: 10px;
+  border-radius: 999px;
+  background: #e8edf3;
+  overflow: hidden;
+}
+
+.shap-cubuk {
+  height: 100%;
+  border-radius: 999px;
+}
+
+.shap-cubuk.arttirici {
+  background: #dc2626;
+}
+
+.shap-cubuk.azaltici {
+  background: #16a34a;
+}
+
+.shap-deger {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #0f172a;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+.shap-notu {
+  margin: 0.55rem 0 0;
+  font-size: 0.76rem;
+  color: #64748b;
+}
+
 .faktor-listesi {
   margin: 0.6rem 0 0;
   padding: 0;
@@ -597,5 +722,14 @@ body {
 
   .grafik-karti {
     grid-template-columns: 1fr;
+  }
+
+  .tum-faktor-detay > summary {
+    margin-left: 0;
+  }
+
+  .shap-satir {
+    grid-template-columns: 1fr;
+    gap: 0.3rem;
   }
 }
