@@ -32,6 +32,15 @@ Bu dosya, proje kapsamını etkileyen önemli kararları kronolojik olarak izlem
   - `dokumanlar/degisim_kaydi.md`
   - `dokumanlar/api_sozlesmesi.md`
 
+### Sunum Hazırlık Paketi
+
+- Sunum sürecini uçtan uca desteklemek için aşağıdaki yeni dokümanlar eklendi:
+  - `dokumanlar/sunum_iskeleti.md`
+  - `dokumanlar/canli_demo_akisi.md`
+  - `dokumanlar/soru_cevap_kartlari.md`
+  - `dokumanlar/prova_kontrol_listesi.md`
+- Sunum akışı, canlı demo senaryoları, soru-cevap kartları ve prova kabul kriterleri tek pakette standartlaştırıldı.
+
 ## Not
 
 Bu değişim kaydı, kod deposundaki commit geçmişinin yerine geçmez; kapsam ve karar izi için tamamlayıcı belgedir.
