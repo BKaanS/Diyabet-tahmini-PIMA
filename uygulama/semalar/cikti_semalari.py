@@ -32,9 +32,7 @@ class TahminCiktisi(BaseModel):
 
     olasilik: float = Field(..., description="Diyabet olasiligi")
     sinif: Literal[0, 1] = Field(..., description="Ikili sinif tahmini")
-    risk_kategorisi: Literal["dusuk", "orta", "yuksek"] = Field(
-        ..., description="Risk seviyesi"
-    )
+    risk_kategorisi: Literal["dusuk", "orta", "yuksek"] = Field(..., description="Risk seviyesi")
     top_faktorler: list[FaktorSemasi] = Field(
         default_factory=list,
         description="Tahmine en cok etki eden faktorler",

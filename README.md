@@ -1,31 +1,34 @@
-# Diyabet Risk Tahmini
+# Diyabet Risk Tahmini (PIMA)
 
-Bu proje, kadin bireylerde diyabet riski icin makine ogrenmesi destekli bir tahmin uygulamasidir.
+Bu proje, **Pima Indians Diabetes** veri seti üzerinden kadın bireylerde diyabet riskini tahmin eden bir makine öğrenmesi uygulamasıdır.  
+Sistem bir klinik tanı aracı değildir; karar destek ve farkındalık amacıyla tasarlanmıştır.
 
-- Veri seti: Pima Indians Diabetes
+## 1. Proje Özeti
+
 - Problem tipi: Binary classification
+- Veri seti: Pima Indians Diabetes (`diabetes.csv`)
 - Modeller: Logistic Regression, Random Forest, XGBoost
 - Backend: FastAPI
-- Arayuz: HTML + Jinja2
-- Aciklanabilirlik: SHAP (top faktorler)
+- Arayüz: HTML + Jinja2
+- Açıklanabilirlik: SHAP tabanlı üst faktörler
 
-## 1. Proje Klasorleri
+## 2. Klasör Yapısı
 
-- `uygulama/`: FastAPI, semalar, servisler, HTML/Jinja sablonlari ve statik dosyalar
-- `makine_ogrenmesi/`: veri, notebook, kaynak kod, artifact ve rapor klasorleri
-- `testler/`: pytest test dosyalari
-- `betikler/`: terminalden calistirilacak yardimci betikler
-- `dagitim/`: gunicorn, nginx, systemd ve deploy notlari
-- `dokumanlar/`: ek proje dokumanlari
+- `uygulama/`: FastAPI uygulaması, servisler, şemalar, şablonlar ve statik dosyalar
+- `makine_ogrenmesi/`: modelleme kodları, veri klasörleri, raporlar, notebook’lar
+- `testler/`: pytest testleri
+- `betikler/`: eğitim, değerlendirme ve raporlama betikleri
+- `dokumanlar/`: proje ve teslimat dokümanları
+- `dagitim/`: deploy (gunicorn/nginx/systemd) dosyaları
 
-## 2. Kurulum
+## 3. Kurulum
 
-### 2.1 Gereksinimler
+### 3.1 Gereksinimler
 
 - Python 3.10+
 - `pip`
 
-### 2.2 Ortam kurulumu
+### 3.2 Sanal ortam ve paket kurulumu
 
 ```bash
 python3 -m venv .venv
@@ -33,13 +36,13 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 2.3 Ortam degiskenleri
+### 3.3 Ortam değişkenleri
 
 ```bash
 cp .env.example .env
 ```
 
-Varsayilan onemli alanlar:
+Önemli varsayılan alanlar:
 
 - `APP_ADI=diyabet-risk-tahmini`
 - `APP_ENV=gelistirme`
@@ -47,40 +50,38 @@ Varsayilan onemli alanlar:
 - `APP_PORT=8000`
 - `MODEL_ARTIFACT_KLASORU=makine_ogrenmesi/artifactler`
 
-## 3. Veri Seti Hazirlama
+## 4. Veri Dosyası
 
-Veri dosyasini su konuma koy:
+Veri dosyasını şu konumda tut:
 
 - `makine_ogrenmesi/veri/ham/diabetes.csv`
 
-Kaynak (Kaggle):
+Kaynak:
 
-- `https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database`
+- https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database
 
-Dosya adinin `diabetes.csv` olmasi ve zorunlu kolonlari icermesi gerekir.
-
-## 4. Uygulamayi Calistirma
+## 5. Uygulamayı Çalıştırma
 
 ```bash
 python3 -m uvicorn uygulama.main:app --host 127.0.0.1 --port 8000 --reload
 ```
 
-Acilan adresler:
+Adresler:
 
 - Ana sayfa: `http://127.0.0.1:8000/`
 - Health: `http://127.0.0.1:8000/health`
 - Swagger: `http://127.0.0.1:8000/docs`
 - ReDoc: `http://127.0.0.1:8000/redoc`
 
-## 5. API Kullanim Ornegi
+## 6. API Örneği
 
-### 5.1 Health
+### 6.1 Health
 
 ```bash
 curl -s http://127.0.0.1:8000/health
 ```
 
-### 5.2 Predict
+### 6.2 Predict
 
 ```bash
 curl -s -X POST http://127.0.0.1:8000/predict \
@@ -97,7 +98,7 @@ curl -s -X POST http://127.0.0.1:8000/predict \
   }'
 ```
 
-Beklenen donus alanlari:
+Dönüş alanları:
 
 - `olasilik`
 - `sinif`
@@ -105,91 +106,95 @@ Beklenen donus alanlari:
 - `top_faktorler`
 - `kisa_aciklama`
 
-## 6. Testleri Calistirma
+## 7. Risk Kategorileri
 
-```bash
-pytest -q
-```
+Mevcut eşik yapısı:
 
-Beklenen: tum testler `passed`.
+- `%0 - %33`: `dusuk`
+- `%33 - %66`: `orta`
+- `%66 - %100`: `yuksek`
 
-## 7. Egitim ve Degerlendirme Betikleri
+## 8. Güncel Resmî Skorlar (Deploy Çıktısı)
 
-### 7.1 Egitim ozeti uretme
+Kaynak: `dokumanlar/resmi_skor_tablosu.md`
+
+| Metrik | Değer |
+| --- | --- |
+| Accuracy | 0.7532 |
+| Precision | 0.6053 |
+| Recall | 0.8519 |
+| F1 | 0.7077 |
+| ROC AUC | 0.8222 |
+| Brier | 0.1612 |
+
+Hedef uyum özeti:
+
+- `ROC AUC >= 0.80`: Sağlandı
+- `F1 >= 0.70`: Sağlandı
+- `Accuracy >= 0.90`: Sağlanmadı
+- `Brier iyileşme >= %10`: Sağlanmadı
+
+Not: `%90+ accuracy` hedefi PIMA veri setinin ölçeği ve bilgi içeriği nedeniyle iddialıdır. Proje dokümanlarında bu sapma teknik gerekçeyle açıklanmıştır.
+
+## 9. Betikler
+
+### 9.1 Eğitim özeti
 
 ```bash
 python3 betikler/egitimi_calistir.py
 ```
 
-Cikti dosyasi:
-
-- `makine_ogrenmesi/raporlar/degerlendirme/egitim_ozeti.json`
-
-### 7.2 Model degerlendirme ozeti uretme
+### 9.2 Model değerlendirme özeti
 
 ```bash
 python3 betikler/degerlendirmeyi_calistir.py
 ```
 
-Cikti dosyasi:
+### 9.3 Resmî skor tablosu üretimi
 
-- `makine_ogrenmesi/raporlar/degerlendirme/model_degerlendirme_ozeti.json`
+```bash
+python3 betikler/resmi_skor_tablosu_uret.py
+```
 
-Not:
+### 9.4 Veri artırmadan optimizasyon raporu
 
-- Tahmin API'si `makine_ogrenmesi/artifactler/` altindaki artifact dosyalarini kullanir.
-- Bu klasorde zorunlu dosyalar (pipeline, kalibrator, esik, metadata) mevcut olmalidir.
+```bash
+python3 betikler/veri_artirmadan_optimizasyon.py
+```
 
-## 8. Deploy Dosyalari
+Bu betik, veri seti boyutunu artırmadan eşik/kalibrasyon/model kombinasyonlarını tarar ve rapor üretir.
 
-Deploy ile ilgili dosyalar:
+## 10. Testler
 
-- `dagitim/gunicorn_conf.py`
-- `dagitim/nginx.conf`
-- `dagitim/diyabet_risk.service`
-- `dagitim/dagitim_notlari.md`
+```bash
+pytest -q
+```
 
-VPS adimlari icin dogrudan:
+## 11. Sık Karşılaşılan Hatalar
 
-- `dagitim/dagitim_notlari.md`
-
-## 9. Sik Karsilasilan Durumlar
-
-### 9.1 Port kullanimda
-
-Hata: `Address already in use`
-
-Cozum:
+### 11.1 `Address already in use`
 
 ```bash
 lsof -i :8000
 kill -9 <PID>
 ```
 
-### 9.2 Veri dosyasi bulunamadi
+### 11.2 `ModuleNotFoundError: No module named 'uygulama'`
 
-Hata: `Veri dosyasi bulunamadi: makine_ogrenmesi/veri/ham/diabetes.csv`
-
-Cozum:
-
-- Komutlari proje kokunden calistir.
-- Dosyanin gercekten su yolda oldugunu kontrol et:
-  - `makine_ogrenmesi/veri/ham/diabetes.csv`
-
-### 9.3 Artifact dosyalari eksik
-
-Hata: `Artifact dosyalari eksik`
-
-Cozum:
-
-- `makine_ogrenmesi/artifactler/` altindaki zorunlu dosyalarin varligini kontrol et.
-- `MODEL_ARTIFACT_KLASORU` yolunu `.env` icinde dogrula.
-
-## 10. Son Teknik Kontrol Komutlari
+- Komutu proje kök dizininden çalıştır.
+- Sanal ortamın aktif olduğundan emin ol.
+- Gerekirse `.venv` ile doğrudan çalıştır:
 
 ```bash
-pytest -q
-python3 -m compileall uygulama makine_ogrenmesi testler betikler
+.venv/bin/python -m uvicorn uygulama.main:app --host 127.0.0.1 --port 8000 --reload
 ```
 
-Bu iki komutun hatasiz bitmesi, temel calisabilirlik ve import tutarliligi icin yeterli son kontroldur.
+### 11.3 Artifact dosyaları eksik
+
+- `makine_ogrenmesi/artifactler/` altında zorunlu artifact dosyalarının bulunduğunu doğrula.
+- `.env` içindeki `MODEL_ARTIFACT_KLASORU` değerini kontrol et.
+
+## 12. Son Not
+
+Bu proje, akademik/Ar-Ge amaçlı bir karar destek çalışmasıdır.  
+Klinik tanı yerine geçmez; tıbbi kararlar için mutlaka uzman hekim değerlendirmesi gerekir.

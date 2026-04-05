@@ -84,16 +84,13 @@ def risk_esiklerini_olustur(
     youden_j_esigi: float,
     f2_esigi: float,
 ) -> dict[str, float]:
-    """Risk seviyeleri icin dusuk/orta/yuksek sinirlarini uretir."""
+    """Risk seviyeleri icin sabit sinirlari uretir."""
     _esik_dogrula(youden_j_esigi)
     _esik_dogrula(f2_esigi)
 
-    dusuk_ust_esik = float(min(youden_j_esigi, f2_esigi))
-    orta_ust_esik = float(max(youden_j_esigi, f2_esigi))
-
     return {
-        "dusuk_ust_esik": dusuk_ust_esik,
-        "orta_ust_esik": orta_ust_esik,
+        "dusuk_ust_esik": 0.33,
+        "orta_ust_esik": 0.66,
     }
 
 
@@ -102,7 +99,7 @@ def risk_kategorisi_belirle(
     dusuk_ust_esik: float,
     orta_ust_esik: float,
 ) -> str:
-    """Olasiliga gore risk kategorisi dondurur: dusuk, orta, yuksek."""
+    """Olasiliga gore risk kategorisi dondurur."""
     _esik_dogrula(olasilik)
     _esik_dogrula(dusuk_ust_esik)
     _esik_dogrula(orta_ust_esik)

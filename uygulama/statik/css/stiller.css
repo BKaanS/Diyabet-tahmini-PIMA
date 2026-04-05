@@ -7,9 +7,9 @@
   --vurgu-koyu: #2d7a8a;
   --hata: #e64a4a;
   --bilgi: #2563eb;
-  --yuksek: #dc2626;
-  --orta: #d97706;
   --dusuk: #16a34a;
+  --orta: #d97706;
+  --yuksek: #dc2626;
   --golge: 0 10px 25px rgba(15, 23, 42, 0.08);
 }
 
@@ -383,6 +383,10 @@ body {
   margin-bottom: 0.4rem;
 }
 
+.cizgi-etiketler span {
+  text-align: center;
+}
+
 .risk-cizgi {
   --oran-yuzde: 0%;
   --sonuc-renk: var(--vurgu);
@@ -444,9 +448,8 @@ body {
   left: 0;
   height: 100%;
   width: var(--oran-yuzde);
-  background: var(--sonuc-renk);
-  opacity: 0.28;
-  border-right: 1px solid var(--sonuc-renk);
+  background: rgba(51, 65, 85, 0.12);
+  border-right: 1px solid rgba(51, 65, 85, 0.4);
   z-index: 2;
 }
 

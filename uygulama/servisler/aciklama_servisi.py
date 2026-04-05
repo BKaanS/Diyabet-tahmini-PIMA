@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from typing import Any
 
+from .risk_servisi import risk_kategorisini_normalize_et
+
 
 def kisa_aciklama_uret(
     risk_kategorisi: str,
@@ -11,6 +13,11 @@ def kisa_aciklama_uret(
     top_faktorler: list[dict[str, Any]] | None = None,
 ) -> str:
     """Risk seviyesine gore kullaniciya kisa aciklama metni uretir."""
+    try:
+        risk_kategorisi = risk_kategorisini_normalize_et(risk_kategorisi)
+    except ValueError:
+        pass
+
     olasilik_yuzde = round(float(olasilik) * 100, 1)
     faktor_notu = _faktor_notunu_hazirla(top_faktorler or [])
 

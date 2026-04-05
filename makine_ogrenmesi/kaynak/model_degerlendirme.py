@@ -8,6 +8,7 @@ import numpy as np
 from sklearn.metrics import (
     accuracy_score,
     auc,
+    brier_score_loss,
     confusion_matrix,
     f1_score,
     precision_recall_curve,
@@ -24,6 +25,7 @@ SKORLAMA_METRIKLERI = {
     "recall": "recall",
     "f1": "f1",
     "roc_auc": "roc_auc",
+    "brier": "neg_brier_score",
 }
 
 
@@ -49,6 +51,7 @@ def model_metriklerini_hesapla(
         "recall": float(recall_score(y_gercek_np, y_tahmin_np, zero_division=0)),
         "f1": float(f1_score(y_gercek_np, y_tahmin_np, zero_division=0)),
         "roc_auc": float(roc_auc_score(y_gercek_np, y_olasilik_np)),
+        "brier": float(brier_score_loss(y_gercek_np, y_olasilik_np)),
     }
 
 

@@ -6,6 +6,30 @@ from typing import Any
 
 from makine_ogrenmesi.kaynak.esik_analizi import risk_kategorisi_belirle
 
+VARSAYILAN_RISK_ESIKLERI = {
+    "dusuk_ust_esik": 0.33,
+    "orta_ust_esik": 0.66,
+}
+
+RISK_KATEGORISI_ESLEMESI = {
+    "dusuk": "dusuk",
+    "low": "dusuk",
+    "cok_dusuk": "dusuk",
+    "cokdusuk": "dusuk",
+    "very_low": "dusuk",
+    "orta": "orta",
+    "medium": "orta",
+    "mid": "orta",
+    "orta_risk": "orta",
+    "yuksek": "yuksek",
+    "high": "yuksek",
+    "cok_yuksek": "yuksek",
+    "cokyuksek": "yuksek",
+    "very_high": "yuksek",
+}
+
+_TR_HARF_CEVIRIMI = str.maketrans("çğıöşü", "cgiosu")
+
 
 def ikili_sinif_hesapla(olasilik: float, esik_yapilandirmasi: dict[str, Any]) -> int:
     """Kalibre edilmis olasiliga gore ikili sinif tahmini uretir."""
@@ -16,11 +40,12 @@ def ikili_sinif_hesapla(olasilik: float, esik_yapilandirmasi: dict[str, Any]) ->
 def risk_kategorisi_hesapla(olasilik: float, esik_yapilandirmasi: dict[str, Any]) -> str:
     """Kalibre edilmis olasiliga gore risk kategorisini dondurur."""
     risk_esikleri = risk_esiklerini_al(esik_yapilandirmasi)
-    return risk_kategorisi_belirle(
+    risk_kategorisi = risk_kategorisi_belirle(
         olasilik=float(olasilik),
         dusuk_ust_esik=float(risk_esikleri["dusuk_ust_esik"]),
         orta_ust_esik=float(risk_esikleri["orta_ust_esik"]),
     )
+    return risk_kategorisini_normalize_et(risk_kategorisi)
 
 
 def risk_ozeti_hazirla(olasilik: float, esik_yapilandirmasi: dict[str, Any]) -> dict[str, Any]:
@@ -36,6 +61,30 @@ def risk_ozeti_hazirla(olasilik: float, esik_yapilandirmasi: dict[str, Any]) -> 
     }
 
 
+def risk_kategorisini_normalize_et(risk_kategorisi: str) -> str:
+    """Legacy veya farkli formatlardan gelen risk etiketini 3'lu standarda cevirir."""
+    sade = str(risk_kategorisi).strip().lower()
+    sade = sade.translate(_TR_HARF_CEVIRIMI)
+    sade = sade.replace("-", "_").replace(" ", "_")
+    while "__" in sade:
+        sade = sade.replace("__", "_")
+
+    if sade in RISK_KATEGORISI_ESLEMESI:
+        return RISK_KATEGORISI_ESLEMESI[sade]
+
+    if "dusuk" in sade or "low" in sade:
+        return "dusuk"
+    if "yuksek" in sade or "high" in sade:
+        return "yuksek"
+    if "orta" in sade or "medium" in sade or "mid" in sade:
+        return "orta"
+
+    raise ValueError(
+        "risk_kategorisi desteklenmeyen degerde geldi: "
+        f"{risk_kategorisi!r}. Beklenen degerler: dusuk, orta, yuksek."
+    )
+
+
 def onerilen_ikili_siniflama_esigi_al(esik_yapilandirmasi: dict[str, Any]) -> float:
     """Esik konfigurasyonundan onerilen ikili siniflama esigini alir."""
     try:
@@ -49,12 +98,9 @@ def onerilen_ikili_siniflama_esigi_al(esik_yapilandirmasi: dict[str, Any]) -> fl
 
 def risk_esiklerini_al(esik_yapilandirmasi: dict[str, Any]) -> dict[str, float]:
     """Risk seviyesi esiklerini konfigurasyondan alir."""
-    try:
-        risk_kategorileri = esik_yapilandirmasi["risk_kategorileri"]
-        dusuk = float(risk_kategorileri["dusuk_ust_esik"])
-        orta = float(risk_kategorileri["orta_ust_esik"])
-    except KeyError as hata:
-        raise KeyError("esik_yapilandirmasi icinde risk esikleri eksik.") from hata
+    risk_kategorileri = esik_yapilandirmasi.get("risk_kategorileri", {})
+    dusuk = float(risk_kategorileri.get("dusuk_ust_esik", VARSAYILAN_RISK_ESIKLERI["dusuk_ust_esik"]))
+    orta = float(risk_kategorileri.get("orta_ust_esik", VARSAYILAN_RISK_ESIKLERI["orta_ust_esik"]))
 
     _birim_aralik_kontrolu(dusuk, "dusuk_ust_esik")
     _birim_aralik_kontrolu(orta, "orta_ust_esik")

@@ -89,14 +89,18 @@ def main() -> None:
         )
 
     sirali_sonuclar = model_sonuclarini_sirala(model_sonuclari)
-    en_iyi_model = en_iyi_modeli_sec(model_sonuclari)
+    en_iyi_test_modeli = en_iyi_modeli_sec(model_sonuclari)
+    hedef_durumu = _hedef_durumu_hazirla(en_iyi_test_modeli)
 
     genel_ozet = {
         "veri_yolu": str(args.veri_yolu),
         "test_boyutu": args.test_boyutu,
         "random_state": args.random_state,
-        "en_iyi_model": _json_uyumlu(en_iyi_model),
+        "en_iyi_model_secim_kriteri": "roc_auc > recall > f1 > accuracy (deploy ile tutarlilik)",
+        "en_iyi_model": _json_uyumlu(en_iyi_test_modeli),
+        "en_iyi_test_modeli": _json_uyumlu(en_iyi_test_modeli),
         "sirali_sonuclar": _json_uyumlu(sirali_sonuclar),
+        "performans_hedef_durumu": _json_uyumlu(hedef_durumu),
     }
 
     args.cikti_yolu.parent.mkdir(parents=True, exist_ok=True)
@@ -117,6 +121,38 @@ def _json_uyumlu(deger):
     if isinstance(deger, list):
         return [_json_uyumlu(v) for v in deger]
     return deger
+
+
+def _hedef_durumu_hazirla(en_iyi_test_modeli: dict[str, object]) -> dict[str, object]:
+    hedefler = {
+        "accuracy_min": 0.90,
+        "roc_auc_min": 0.80,
+        "f1_min": 0.70,
+    }
+    accuracy = float(en_iyi_test_modeli["accuracy"])
+    roc_auc = float(en_iyi_test_modeli["roc_auc"])
+    f1 = float(en_iyi_test_modeli["f1"])
+    brier = float(en_iyi_test_modeli["brier"])
+    durum = {
+        "accuracy": accuracy,
+        "roc_auc": roc_auc,
+        "f1": f1,
+        "brier": brier,
+        "hedefler": hedefler,
+        "hedefler_saglandi_mi": (
+            accuracy >= hedefler["accuracy_min"]
+            and roc_auc >= hedefler["roc_auc_min"]
+            and f1 >= hedefler["f1_min"]
+        ),
+    }
+    if durum["hedefler_saglandi_mi"]:
+        durum["yorum"] = "Tanimli performans hedefleri saglandi."
+    else:
+        durum["yorum"] = (
+            "Hedeflerin tamami saglanamadi. Proje planindaki B-plani devreye alindi ve "
+            "AUC/F1 dengesine gore en tutarli model adaylari raporlandi."
+        )
+    return durum
 
 
 if __name__ == "__main__":
