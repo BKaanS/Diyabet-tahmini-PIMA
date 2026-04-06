@@ -1,16 +1,20 @@
 :root {
-  --arka: #f6f7f8;
-  --kart: #ffffff;
-  --metin: #1f2937;
-  --ikincil-metin: #4b5563;
-  --vurgu: #3999ac;
-  --vurgu-koyu: #2d7a8a;
+  --arka: #fcfaf8;
+  --kart: #f7f1ed;
+  --metin: #6b565b;
+  --ikincil-metin: #7e6668;
+  --vurgu: #cfa6a1;
+  --vurgu-koyu: #b89398;
+  --vurgu-yumusak: #e7d3cf;
+  --nude: #dcc8be;
+  --cizgi: #cbb8b1;
+  --detay-koyu: #6b565b;
   --hata: #e64a4a;
-  --bilgi: #2563eb;
+  --bilgi: #7e6668;
   --dusuk: #16a34a;
-  --orta: #d97706;
+  --orta: #dade00;
   --yuksek: #dc2626;
-  --golge: 0 10px 25px rgba(15, 23, 42, 0.08);
+  --golge: 0 12px 28px rgba(107, 86, 91, 0.12);
 }
 
 * {
@@ -21,7 +25,7 @@ body {
   margin: 0;
   font-family: "Manrope", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: var(--metin);
-  background: linear-gradient(150deg, #eaf4f7 0%, #f8fafc 45%, #eef4ff 100%);
+  background: linear-gradient(150deg, #fcfaf8 0%, #f7f1ed 48%, #f1e7e2 100%);
   min-height: 100vh;
 }
 
@@ -29,9 +33,9 @@ body {
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(circle at 12% 18%, rgba(57, 153, 172, 0.18), transparent 42%),
-    radial-gradient(circle at 88% 10%, rgba(45, 122, 138, 0.15), transparent 38%),
-    radial-gradient(circle at 70% 80%, rgba(37, 99, 235, 0.08), transparent 30%);
+    radial-gradient(circle at 12% 18%, rgba(207, 166, 161, 0.22), transparent 42%),
+    radial-gradient(circle at 88% 10%, rgba(184, 147, 152, 0.2), transparent 38%),
+    radial-gradient(circle at 70% 80%, rgba(216, 182, 176, 0.16), transparent 30%);
   pointer-events: none;
 }
 
@@ -40,8 +44,8 @@ body {
   top: 0;
   z-index: 20;
   backdrop-filter: blur(8px);
-  background: rgba(255, 255, 255, 0.88);
-  border-bottom: 1px solid #dbe6ec;
+  background: rgba(252, 250, 248, 0.88);
+  border-bottom: 1px solid var(--cizgi);
 }
 
 .ust-cubuk-icerik {
@@ -57,8 +61,8 @@ body {
   width: 2.4rem;
   height: 2.4rem;
   border-radius: 0.75rem;
-  border: 1px solid rgba(57, 153, 172, 0.24);
-  background: #eef8fb;
+  border: 1px solid rgba(184, 147, 152, 0.38);
+  background: #f3e5e1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -123,7 +127,7 @@ body {
   text-transform: none;
   letter-spacing: 0.01em;
   font-size: 0.82rem;
-  color: #1e3a4d;
+  color: var(--detay-koyu);
 }
 
 .alt-metin {
@@ -136,7 +140,7 @@ body {
   border-radius: 1rem;
   padding: 1.2rem;
   box-shadow: var(--golge);
-  border: 1px solid rgba(57, 153, 172, 0.15);
+  border: 1px solid rgba(203, 184, 177, 0.6);
 }
 
 .kart h2 {
@@ -156,16 +160,16 @@ body {
 }
 
 .alan-grup {
-  background: #f9fbfd;
+  background: var(--arka);
   border-radius: 0.9rem;
   padding: 1rem;
-  border: 1px solid #dde7ee;
+  border: 1px solid var(--nude);
 }
 
 .alan-grup h3 {
   margin-top: 0;
   margin-bottom: 0.8rem;
-  color: #0f172a;
+  color: var(--detay-koyu);
 }
 
 .form-alani {
@@ -187,26 +191,26 @@ body {
 .birim {
   font-weight: 500;
   font-size: 0.76rem;
-  color: #64748b;
+  color: var(--ikincil-metin);
 }
 
 .form-alani input {
-  border: 1px solid #cbd5e1;
+  border: 1px solid var(--cizgi);
   border-radius: 0.7rem;
   padding: 0.65rem 0.75rem;
   font-size: 0.95rem;
-  background: #fff;
+  background: var(--arka);
 }
 
 .form-alani input:focus {
-  outline: 2px solid rgba(57, 153, 172, 0.28);
+  outline: 2px solid rgba(207, 166, 161, 0.35);
   border-color: var(--vurgu);
 }
 
 .alan-yardim {
   margin-top: 0.35rem;
   font-size: 0.77rem;
-  color: #64748b;
+  color: var(--ikincil-metin);
 }
 
 .buton-alani {
@@ -218,9 +222,11 @@ body {
 }
 
 .buton {
+  position: relative;
+  isolation: isolate;
   background: var(--vurgu);
   color: #fff;
-  border: none;
+  border: 1px solid transparent;
   border-radius: 0.65rem;
   padding: 0.7rem 1rem;
   font-weight: 700;
@@ -229,14 +235,75 @@ body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.24s ease,
+    background 0.24s ease,
+    border-color 0.24s ease;
+}
+
+.buton:not(.ikincil) {
+  background: linear-gradient(140deg, #cfa6a1 0%, #b89398 58%, #6b565b 100%);
+  border-color: rgba(107, 86, 91, 0.45);
+  box-shadow:
+    0 10px 22px rgba(107, 86, 91, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
+}
+
+.buton:not(.ikincil)::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 0.8rem;
+  z-index: -1;
+  opacity: 0;
+  background:
+    radial-gradient(circle at 28% 25%, rgba(231, 211, 207, 0.72), transparent 58%),
+    radial-gradient(circle at 72% 76%, rgba(207, 166, 161, 0.62), transparent 62%);
+  filter: blur(10px);
+  transition: opacity 0.24s ease;
 }
 
 .buton:hover {
   background: var(--vurgu-koyu);
 }
 
+.buton:not(.ikincil):hover {
+  background: linear-gradient(140deg, #d8b6b0 0%, #cfa6a1 48%, #7e6668 100%);
+  border-color: rgba(107, 86, 91, 0.55);
+  transform: translateY(-1px);
+  box-shadow:
+    0 14px 30px rgba(107, 86, 91, 0.36),
+    0 0 22px rgba(207, 166, 161, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.32);
+}
+
+.buton:not(.ikincil):hover::after {
+  opacity: 1;
+}
+
+.buton:not(.ikincil):focus-visible {
+  outline: 2px solid rgba(207, 166, 161, 0.58);
+  outline-offset: 2px;
+}
+
 .buton.ikincil {
-  background: #334155;
+  background: linear-gradient(140deg, #e7d3cf 0%, #d8b6b0 55%, #cfa6a1 100%);
+  color: var(--detay-koyu);
+  border-color: rgba(203, 184, 177, 0.9);
+  box-shadow:
+    0 8px 16px rgba(107, 86, 91, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.34);
+}
+
+.buton.ikincil:hover {
+  background: linear-gradient(140deg, #dcc8be 0%, #d8b6b0 48%, #b89398 100%);
+  border-color: rgba(184, 147, 152, 0.7);
+  box-shadow:
+    0 12px 24px rgba(107, 86, 91, 0.24),
+    0 0 14px rgba(207, 166, 161, 0.26),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 .sonuc-ust {
@@ -287,8 +354,8 @@ body {
 }
 
 .ozet-kutusu {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+  background: var(--arka);
+  border: 1px solid var(--nude);
   border-radius: 0.75rem;
   padding: 0.85rem;
 }
@@ -311,13 +378,18 @@ body {
 .grafik-karti h4 {
   margin: 0 0 0.6rem;
   font-size: 0.92rem;
+  color: var(--detay-koyu);
+  font-weight: 700;
 }
 
 .pie-blok {
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--nude);
   border-radius: 0.8rem;
-  background: #fbfdff;
+  background: linear-gradient(180deg, #f9f4f1 0%, var(--arka) 100%);
   padding: 0.85rem;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    0 8px 16px rgba(107, 86, 91, 0.08);
 }
 
 .pie-grafik {
@@ -351,12 +423,7 @@ body {
 }
 
 .pie-grafik::after {
-  content: "";
-  position: absolute;
-  inset: 10px;
-  border-radius: 50%;
-  border: 1px solid rgba(148, 163, 184, 0.26);
-  pointer-events: none;
+  content: none;
 }
 
 .pie-merkez {
@@ -384,10 +451,13 @@ body {
 }
 
 .cizgi-blok {
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--nude);
   border-radius: 0.8rem;
-  background: #fbfdff;
+  background: linear-gradient(180deg, #f9f4f1 0%, var(--arka) 100%);
   padding: 0.85rem;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    0 8px 16px rgba(107, 86, 91, 0.08);
 }
 
 .cizgi-etiketler {
@@ -395,7 +465,7 @@ body {
   justify-content: space-between;
   font-size: 0.74rem;
   font-weight: 700;
-  color: #64748b;
+  color: var(--ikincil-metin);
   margin-bottom: 0.4rem;
 }
 
@@ -472,7 +542,7 @@ body {
 .cizgi-notu {
   margin: 0.55rem 0 0;
   font-size: 0.77rem;
-  color: #64748b;
+  color: var(--ikincil-metin);
   line-height: 1.45;
 }
 
@@ -489,10 +559,10 @@ body {
 
 .faktor-karti {
   margin: 1rem 0;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--nude);
   border-radius: 0.8rem;
   padding: 0.9rem;
-  background: #fff;
+  background: var(--arka);
 }
 
 .faktor-karti h3 {
@@ -532,23 +602,23 @@ body {
   justify-content: center;
   border-radius: 0.6rem;
   padding: 0.45rem 0.75rem;
-  border: 1px solid #cbd5e1;
-  background: #f8fafc;
-  color: #0f172a;
+  border: 1px solid var(--cizgi);
+  background: var(--kart);
+  color: var(--detay-koyu);
   font-weight: 700;
   font-size: 0.8rem;
 }
 
 .tum-faktor-buton:hover {
-  background: #f1f5f9;
+  background: var(--vurgu-yumusak);
 }
 
 .tum-faktor-panel {
   margin-top: 0.7rem;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--nude);
   border-radius: 0.7rem;
   padding: 0.75rem;
-  background: #fbfdff;
+  background: var(--arka);
 }
 
 .tum-faktor-panel h4 {
@@ -571,7 +641,7 @@ body {
 
 .shap-ozellik {
   font-size: 0.8rem;
-  color: #334155;
+  color: var(--ikincil-metin);
   font-weight: 600;
 }
 
@@ -598,14 +668,14 @@ body {
 .shap-deger {
   font-size: 0.78rem;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--detay-koyu);
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
 }
 
 .shap-notu {
   margin: 0.55rem 0 0;
   font-size: 0.76rem;
-  color: #64748b;
+  color: var(--ikincil-metin);
 }
 
 .faktor-listesi {
@@ -617,19 +687,19 @@ body {
 .faktor-listesi li {
   display: flex;
   gap: 0.7rem;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--nude);
   border-radius: 0.7rem;
   padding: 0.6rem;
   margin-bottom: 0.55rem;
-  background: #f9fbfd;
+  background: var(--kart);
 }
 
 .sira-balonu {
   width: 1.8rem;
   height: 1.8rem;
   border-radius: 999px;
-  background: #ffffff;
-  border: 1px solid #d1d5db;
+  background: var(--arka);
+  border: 1px solid var(--cizgi);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -656,8 +726,8 @@ body {
 }
 
 .aciklama-karti {
-  border: 1px solid #dbeafe;
-  background: #f8fbff;
+  border: 1px solid var(--nude);
+  background: #f8efec;
   border-radius: 0.8rem;
   padding: 0.9rem;
   margin: 1rem 0;
@@ -681,18 +751,18 @@ body {
 }
 
 .uyari.bilgi {
-  background: #eff6ff;
-  border: 1px solid #bfdbfe;
+  background: #f3e8e5;
+  border: 1px solid var(--nude);
   color: var(--bilgi);
 }
 
 .alt-cubuk {
-  border-top: 1px solid #dbe6ec;
+  border-top: 1px solid var(--cizgi);
   padding: 1.1rem 1rem 1.4rem;
   text-align: center;
-  color: #64748b;
+  color: var(--ikincil-metin);
   font-size: 0.8rem;
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(252, 250, 248, 0.84);
 }
 
 .alt-cubuk p {
