@@ -26,6 +26,13 @@ def sifirlari_nan_yap(
     return donusmus_veri
 
 
+def sifirlari_nan_donustur_pipeline(veri: pd.DataFrame) -> pd.DataFrame:
+    """Pipeline icin 0 -> NaN donusumunu sabit kolon setiyle uygular."""
+    if not isinstance(veri, pd.DataFrame):
+        raise TypeError("Pipeline girisi pandas DataFrame olmalidir.")
+    return sifirlari_nan_yap(veri, kolonlar=SIFIRI_EKSIK_SAYILAN_KOLONLAR)
+
+
 def median_imputer_olustur() -> SimpleImputer:
     """Median stratejili imputasyon nesnesi dondurur."""
     return SimpleImputer(strategy="median")

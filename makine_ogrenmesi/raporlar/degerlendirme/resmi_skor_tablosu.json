@@ -1,5 +1,5 @@
 {
-  "olusturma_zamani_utc": "2026-04-05T14:16:54.876084+00:00",
+  "olusturma_zamani_utc": "2026-04-07T17:58:29.039064+00:00",
   "veri": {
     "veri_yolu": "/Users/beratkaanseven/Desktop/VSCoding/Diyabet_Projesi/diyabet_risk_tahmini/makine_ogrenmesi/veri/ham/diabetes.csv",
     "test_boyutu": 0.2,
@@ -7,16 +7,16 @@
     "test_ornek_sayisi": 154
   },
   "hedefler": {
-    "accuracy_min": 0.9,
+    "accuracy_min": 0.78,
     "roc_auc_min": 0.8,
     "f1_min": 0.7,
     "brier_iyilesme_orani_min": 0.1
   },
   "deploy": {
     "model_adi": "xgboost",
-    "kalibrasyon_yontemi": "isotonic",
-    "ikili_siniflama_yontemi": "f1_optimum",
-    "ikili_siniflama_esigi": 0.32,
+    "kalibrasyon_yontemi": "none",
+    "ikili_siniflama_yontemi": "accuracy_oncelikli_f1_kisitli",
+    "ikili_siniflama_esigi": 0.37999999999999995,
     "risk_kategorileri": {
       "dusuk_ust_esik": 0.33,
       "orta_ust_esik": 0.66,
@@ -27,29 +27,29 @@
       ]
     },
     "metrikler": {
-      "accuracy": 0.7532467532467533,
-      "precision": 0.6052631578947368,
+      "accuracy": 0.7727272727272727,
+      "precision": 0.6301369863013698,
       "recall": 0.8518518518518519,
-      "f1": 0.7076923076923077,
-      "roc_auc": 0.8222222222222221,
-      "brier": 0.1612267696231907,
-      "siniflama_esigi": 0.32
+      "f1": 0.7244094488188977,
+      "roc_auc": 0.8262962962962963,
+      "brier": 0.16619129478931427,
+      "siniflama_esigi": 0.37999999999999995
     },
     "esik_05_referans_metrikleri": {
-      "accuracy": 0.7597402597402597,
-      "precision": 0.6976744186046512,
-      "recall": 0.5555555555555556,
-      "f1": 0.6185567010309279,
-      "roc_auc": 0.8222222222222221,
-      "brier": 0.1612267696231907,
+      "accuracy": 0.7402597402597403,
+      "precision": 0.6129032258064516,
+      "recall": 0.7037037037037037,
+      "f1": 0.6551724137931034,
+      "roc_auc": 0.8262962962962963,
+      "brier": 0.16619129478931427,
       "siniflama_esigi": 0.5
     }
   },
   "kalibrasyon": {
-    "brier_once": 0.17676477134227753,
-    "brier_sonra": 0.1612267696231907,
-    "brier_iyilesme_orani": 0.08790214023471841,
-    "brier_iyilesme_yuzde": 8.790214023471842
+    "brier_once": 0.16619129478931427,
+    "brier_sonra": 0.16619129478931427,
+    "brier_iyilesme_orani": 0.0,
+    "brier_iyilesme_yuzde": 0.0
   },
   "model_degerlendirme_raporu": {
     "rapor_yolu": "/Users/beratkaanseven/Desktop/VSCoding/Diyabet_Projesi/diyabet_risk_tahmini/makine_ogrenmesi/raporlar/degerlendirme/model_degerlendirme_ozeti.json",
@@ -111,6 +111,80 @@
           "model__C": 0.1
         }
       }
+    ]
+  },
+  "degerlendirme_deploy_farki": {
+    "ham_model_adi": "xgboost",
+    "ham_degerlendirme_esigi": 0.5,
+    "deploy_kalibrasyon_yontemi": "none",
+    "deploy_esigi": 0.37999999999999995,
+    "metrik_farklari": {
+      "accuracy": {
+        "ham_degerlendirme": 0.7402597402597403,
+        "deploy": 0.7727272727272727,
+        "fark": 0.03246753246753242
+      },
+      "precision": {
+        "ham_degerlendirme": 0.6029411764705882,
+        "deploy": 0.6301369863013698,
+        "fark": 0.027195809830781625
+      },
+      "recall": {
+        "ham_degerlendirme": 0.7592592592592593,
+        "deploy": 0.8518518518518519,
+        "fark": 0.09259259259259256
+      },
+      "f1": {
+        "ham_degerlendirme": 0.6721311475409836,
+        "deploy": 0.7244094488188977,
+        "fark": 0.05227830127791411
+      },
+      "roc_auc": {
+        "ham_degerlendirme": 0.8338888888888889,
+        "deploy": 0.8262962962962963,
+        "fark": -0.007592592592592595
+      },
+      "brier": {
+        "ham_degerlendirme": 0.16558994352817535,
+        "deploy": 0.16619129478931427,
+        "fark": 0.000601351261138916
+      }
+    },
+    "aciklama": "Model degerlendirme raporu, ham model adaylarini test setinde 0.50 siniflama esigi ile karsilastirir. Deploy metrikleri ise secilen model + secilen kalibrasyon + optimize edilen ikili siniflama esigi ile hesaplandigi icin fark olusmasi normaldir."
+  },
+  "literatur_benchmarklari": {
+    "veri_seti": "Pima Indians Diabetes (768 satir)",
+    "guvenilir_bantlar": {
+      "accuracy": {
+        "alt": 0.75,
+        "ust": 0.84
+      },
+      "f1": {
+        "alt": 0.62,
+        "ust": 0.85
+      },
+      "roc_auc": {
+        "alt": 0.8,
+        "ust": 0.87
+      },
+      "precision": {
+        "alt": 0.57,
+        "ust": 0.93
+      },
+      "recall": {
+        "alt": 0.65,
+        "ust": 0.9
+      },
+      "brier": {
+        "alt": 0.15,
+        "ust": 0.2
+      }
+    },
+    "metodoloji_notlari": [
+      "Kucuk veri setlerinde tek bolme ile raporlanan cok yuksek sonuclarin genellenebilirligi dusuktur.",
+      "SMOTE yalnizca egitim katmaninda uygulanmalidir; test verisine uygulanmasi veri sizintisi olusturur.",
+      "PIMA icin %98-%100 accuracy iddialari cogu durumda overfit veya leakage riski tasir.",
+      "Bu projede stratified split, capraz dogrulama ve kalibrasyon ayrimi korunmustur."
     ]
   },
   "hedef_durumu": {

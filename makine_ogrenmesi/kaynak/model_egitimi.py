@@ -10,10 +10,11 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import GridSearchCV, StratifiedKFold
 from sklearn.preprocessing import FunctionTransformer
 
-from .on_isleme import median_imputer_olustur, sifirlari_nan_yap, standard_scaler_olustur
-from .ozellik_yapilandirmasi import SIFIRI_EKSIK_SAYILAN_KOLONLAR
-
-
+from .on_isleme import (
+    median_imputer_olustur,
+    sifirlari_nan_donustur_pipeline,
+    standard_scaler_olustur,
+)
 RANDOM_STATE = 42
 
 
@@ -74,9 +75,7 @@ def grid_searchleri_olustur(
 
 def _sifirlari_nan_donustur(veri: pd.DataFrame) -> pd.DataFrame:
     """Sadece belirlenen kolonlarda 0 degerini NaN'a cevirir."""
-    if not isinstance(veri, pd.DataFrame):
-        raise TypeError("Pipeline girisi pandas DataFrame olmalidir.")
-    return sifirlari_nan_yap(veri, kolonlar=SIFIRI_EKSIK_SAYILAN_KOLONLAR)
+    return sifirlari_nan_donustur_pipeline(veri)
 
 
 def _ortak_pipeline_adimlari(model) -> list[tuple[str, object]]:
