@@ -15,7 +15,7 @@
   <header class="ust-cubuk">
     <div class="ust-cubuk-icerik">
       <div class="logo-kutu">
-        <img src="{{ url_for('statik', path='img/diyabet_logo.svg') }}" alt="Diyabet Risk Logo" />
+        <img src="{{ url_for('statik', path='img/diyabet_kadin_logo.svg') }}" alt="Diyabet Risk Logo" />
       </div>
       <div>
         <h1 class="marka-baslik">Kadınlarda Diyabet Risk Tahmini</h1>
@@ -37,10 +37,15 @@
   </main>
 
   <footer class="alt-cubuk">
-    <p>
-      Yasal uyarı: Bu uygulama istatistiksel bir tahmin sunar. Sonuçlar kesin tanı değildir ve
-      profesyonel tıbbi değerlendirme yerine geçmez.
-    </p>
+    <div class="alt-cubuk-icerik">
+      <div class="alt-logo-kutu">
+        <img src="{{ url_for('statik', path='img/diyabet_kadin_logo.svg') }}" alt="Kadın Diyabet Risk Logo" />
+      </div>
+      <p>
+        Yasal uyarı: Bu uygulama istatistiksel bir tahmin sunar. Sonuçlar kesin tanı değildir ve
+        profesyonel tıbbi değerlendirme yerine geçmez.
+      </p>
+    </div>
   </footer>
 
   <script src="{{ url_for('statik', path='js/uygulama.js') }}"></script>

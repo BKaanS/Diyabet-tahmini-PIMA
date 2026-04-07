@@ -73,7 +73,7 @@ body {
   width: 100%;
   height: 100%;
   display: block;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .marka-baslik {
@@ -759,15 +759,46 @@ body {
 .alt-cubuk {
   border-top: 1px solid var(--cizgi);
   padding: 1.1rem 1rem 1.4rem;
-  text-align: center;
   color: var(--ikincil-metin);
   font-size: 0.8rem;
   background: rgba(252, 250, 248, 0.84);
 }
 
-.alt-cubuk p {
+.alt-cubuk-icerik {
   max-width: 920px;
   margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+}
+
+.alt-logo-kutu {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.9rem;
+  border: 1px solid rgba(184, 147, 152, 0.45);
+  background: #f5e9e5;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.72),
+    0 6px 14px rgba(107, 86, 91, 0.13);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.28rem;
+  flex-shrink: 0;
+}
+
+.alt-logo-kutu img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.alt-cubuk p {
+  max-width: 920px;
+  margin: 0;
   line-height: 1.5;
 }
 
@@ -801,5 +832,11 @@ body {
   .shap-satir {
     grid-template-columns: 1fr;
     gap: 0.3rem;
+  }
+
+  .alt-cubuk-icerik {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.55rem;
   }
 }

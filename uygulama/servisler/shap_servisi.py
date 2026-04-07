@@ -9,7 +9,6 @@ from typing import Any
 
 import pandas as pd
 
-from makine_ogrenmesi.kaynak.aciklanabilirlik import top_faktorleri_hazirla as shap_top_faktorleri
 from makine_ogrenmesi.kaynak.ozellik_yapilandirmasi import OZELLIK_KOLONLARI
 from makine_ogrenmesi.kaynak.veri_yukleyici import veri_setini_yukle
 
@@ -42,6 +41,7 @@ def top_faktorleri_uret(
     arka_plan = _arka_plan_verisini_yukle(veri_yolu)
     arka_plan = arka_plan[x_ornek.columns.tolist()]
 
+    shap_top_faktorleri = _shap_top_faktorleri_al()
     faktorler = shap_top_faktorleri(
         model=model,
         x_arka_plan=arka_plan,
@@ -51,6 +51,15 @@ def top_faktorleri_uret(
         random_state=42,
     )
     return [_faktor_adi_uyarla(faktor) for faktor in faktorler]
+
+
+def _shap_top_faktorleri_al():
+    """SHAP bagimliligini sadece ihtiyac aninda yukler."""
+    from makine_ogrenmesi.kaynak.aciklanabilirlik import (
+        top_faktorleri_hazirla as shap_top_faktorleri,
+    )
+
+    return shap_top_faktorleri
 
 
 def _faktor_adi_uyarla(faktor: dict[str, Any]) -> dict[str, Any]:
