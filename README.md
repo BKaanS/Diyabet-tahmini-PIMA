@@ -120,12 +120,12 @@ Kaynak: `dokumanlar/resmi_skor_tablosu.md`
 
 | Metrik | Değer |
 | --- | --- |
-| Accuracy | 0.7532 |
-| Precision | 0.6053 |
+| Accuracy | 0.7727 |
+| Precision | 0.6301 |
 | Recall | 0.8519 |
-| F1 | 0.7077 |
-| ROC AUC | 0.8222 |
-| Brier | 0.1612 |
+| F1 | 0.7244 |
+| ROC AUC | 0.8263 |
+| Brier | 0.1662 |
 
 ## 9. Betikler
 
