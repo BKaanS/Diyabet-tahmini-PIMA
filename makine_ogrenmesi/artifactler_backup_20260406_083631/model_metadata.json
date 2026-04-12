@@ -1,0 +1,14 @@
+{
+  "proje_adi": "diyabet_risk_tahmini",
+  "veri_seti": "Pima Indians Diabetes",
+  "problem_tipi": "binary_classification",
+  "olusturulma_zamani_utc": "2026-04-05T16:57:15.924945+00:00",
+  "python_surumu": "3.13.0",
+  "sklearn_surumu": "1.8.0",
+  "model_adi": "xgboost",
+  "kalibrasyon_yontemi": "isotonic",
+  "ikili_siniflama_yontemi": "f1_optimum",
+  "ikili_siniflama_esigi": 0.23,
+  "test_boyutu": 0.2,
+  "random_state": 42
+}
