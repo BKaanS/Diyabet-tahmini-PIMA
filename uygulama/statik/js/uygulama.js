@@ -10,6 +10,6 @@
       return;
     }
     buton.disabled = true;
-    buton.textContent = 'Hesaplaniyor...';
+    buton.textContent = 'Hesaplanıyor...';
   });
 })();
