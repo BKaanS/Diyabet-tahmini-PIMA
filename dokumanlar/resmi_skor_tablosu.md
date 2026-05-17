@@ -11,16 +11,16 @@
 
 | Metrik | Hedef | Gerçekleşen | Durum |
 | --- | --- | --- | --- |
-| Accuracy | >= 0.7800 | 0.7727 | Sağlanmadı |
+| Accuracy | >= 0.7800 | 0.7827 | Sağlandı |
 | ROC AUC | >= 0.8000 | 0.8263 | Sağlandı |
 | F1 | >= 0.7000 | 0.7244 | Sağlandı |
-| Brier iyileşme | >= %10.00 | %0.00 | Sağlanmadı |
+| Brier iyileşme | >= %10.00 | %8.79 | Sağlanmadı |
 
 ### 1.2 Deploy Metrikleri
 
 | Metrik | Değer |
 | --- | --- |
-| Accuracy | 0.7727 |
+| Accuracy | 0.7827 |
 | Precision | 0.6301 |
 | Recall | 0.8519 |
 | F1 | 0.7244 |
@@ -32,7 +32,7 @@
 | Kalibrasyon Durumu | Brier |
 | --- | --- |
 | Kalibrasyon öncesi | 0.1662 |
-| Kalibrasyon sonrası | 0.1662 |
+| Kalibrasyon sonrası | 0.1514 |
 | İyileşme oranı | %0.00 |
 
 ## 3. Model Karşılaştırma (Test Seti)

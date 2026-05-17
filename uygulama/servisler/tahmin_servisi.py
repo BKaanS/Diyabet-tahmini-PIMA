@@ -81,7 +81,7 @@ def tek_ornek_tahmin_uret(
         tum_faktorler = _guvenli_top_faktorleri_uret(
             model=pipeline,
             x_ornek=x_ornek,
-            top_n=max(3, x_ornek.shape[1]),
+            top_n=5,
         )
     kisa_aciklama = kisa_aciklama_uret(
         risk_kategorisi=risk_ozeti["risk_kategorisi"],

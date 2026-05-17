@@ -8,6 +8,7 @@ from fastapi.templating import Jinja2Templates
 from pydantic import ValidationError
 
 from uygulama.semalar.cikti_semalari import TahminCiktisi
+from uygulama.semalar.dogrulamalar import dogrulama_hatalarini_ozetle
 from uygulama.semalar.girdi_semalari import TahminGirdisi
 from uygulama.servisler.tahmin_servisi import tek_ornek_tahmin_uret
 
@@ -90,8 +91,4 @@ async def sonuc_sayfasi(request: Request) -> HTMLResponse:
 
 def _dogrulama_hatasini_ozetle(hata: ValidationError) -> str:
     """Ilk dogrulama hatasini formda gostermek icin sade metin uretir."""
-    ilk_hata = hata.errors()[0] if hata.errors() else {}
-    ham_alan = ilk_hata.get("loc", [])
-    alan = str(ham_alan[-1]) if ham_alan else "girdi"
-    mesaj = str(ilk_hata.get("msg", "Gecersiz girdi."))
-    return f"{alan}: {mesaj}"
+    return dogrulama_hatalarini_ozetle(hata.errors())

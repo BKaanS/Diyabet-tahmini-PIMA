@@ -1,0 +1,19 @@
+{
+  "ikili_siniflama_esikleri": {
+    "pima_1000_1000_extra_trees_v1": {
+      "esik": 0.45,
+      "aciklama": "PIMA 1000/1000 sentetik eğitim seti için iç doğrulama/holdout dengesine göre seçilen eşik."
+    }
+  },
+  "onerilen_ikili_siniflama_esigi": 0.45,
+  "onerilen_ikili_siniflama_yontemi": "pima_1000_1000_extra_trees_v1",
+  "risk_kategorileri": {
+    "dusuk_ust_esik": 0.33,
+    "orta_ust_esik": 0.66,
+    "etiketler": [
+      "dusuk",
+      "orta",
+      "yuksek"
+    ]
+  }
+}

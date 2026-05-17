@@ -1,16 +1,62 @@
 {% extends "base.html" %}
 
-{% block title %}Diyabet Risk Tahmini | Ana Sayfa{% endblock %}
+{% block title %}Diyabet Risk Tahmini | Risk Hesaplama{% endblock %}
+{% block body_class %}is-form{% endblock %}
 
 {% block icerik %}
-<section class="kart">
-  <h2>Risk Hesaplama Formu</h2>
-  <p class="kart-aciklama">
-    Aşağıdaki bilgileri girerek tahmini risk olasılığını hesaplayabilirsiniz.
-  </p>
+<section class="hero">
+  <div class="hero-text">
+    <h1>Birkaç dakikada <span class="hero-accent">diyabet risk tahmini</span></h1>
+    <p class="hero-lead">
+      <strong>Sekiz</strong> klinik parametreyi girin. Kalibre edilmiş yapay zeka modelimiz risk olasılığınızı, kategorinizi ve kişiselleştirilmiş etki faktörlerini paylaşsın.
+    </p>
+  </div>
+
+  <aside class="hero-ticker" aria-label="Modelleme yaklaşımı">
+    <div class="vticker-box" aria-label="Öne çıkan özellikler">
+      <div class="vticker">
+        <ul class="vticker-track">
+          <li class="vt-item"><b>Kalibre edilmiş olasılık üretimi</b><em>Risk yüzdesi karar eşiğinden bağımsız raporlanır</em></li>
+          <li class="vt-item"><b>Source ID kontrollü doğrulama</b><em>Sentetik örneklerin aynı kaynaktan sızması engellenir</em></li>
+          <li class="vt-item"><b>SHAP tabanlı kişisel açıklama</b><em>Tahmine etki eden değişkenler hasta özelinde sıralanır</em></li>
+          <li class="vt-item"><b>Klinik aralık denetimi</b><em>Geçersiz girişler tahmin öncesinde reddedilir</em></li>
+          <li class="vt-item"><b>Dengeli karar eşiği</b><em>Duyarlılık ve kesinlik birlikte değerlendirilir</em></li>
+          <li class="vt-item"><b>Sekiz temel klinik girdi</b><em>PIMA veri setindeki standart değişkenler kullanılır</em></li>
+          <li class="vt-item" aria-hidden="true"><b>Kalibre edilmiş olasılık üretimi</b><em>Risk yüzdesi karar eşiğinden bağımsız raporlanır</em></li>
+          <li class="vt-item" aria-hidden="true"><b>Source ID kontrollü doğrulama</b><em>Sentetik örneklerin aynı kaynaktan sızması engellenir</em></li>
+          <li class="vt-item" aria-hidden="true"><b>SHAP tabanlı kişisel açıklama</b><em>Tahmine etki eden değişkenler hasta özelinde sıralanır</em></li>
+          <li class="vt-item" aria-hidden="true"><b>Klinik aralık denetimi</b><em>Geçersiz girişler tahmin öncesinde reddedilir</em></li>
+          <li class="vt-item" aria-hidden="true"><b>Dengeli karar eşiği</b><em>Duyarlılık ve kesinlik birlikte değerlendirilir</em></li>
+          <li class="vt-item" aria-hidden="true"><b>Sekiz temel klinik girdi</b><em>PIMA veri setindeki standart değişkenler kullanılır</em></li>
+        </ul>
+        <span class="vt-fade vt-fade-top" aria-hidden="true"></span>
+        <span class="vt-fade vt-fade-bot" aria-hidden="true"></span>
+      </div>
+    </div>
+  </aside>
+</section>
+
+<section class="form-card" id="form-bolumu">
+  <header class="card-head">
+    <div>
+      <h2>Risk Hesaplama Formu</h2>
+      <p class="card-sub">Tüm alanları doldurun. Veriler yalnız tahmin için işlenir, kayıt tutulmaz.</p>
+    </div>
+    <div class="step-line" aria-hidden="true">
+      <span class="step active">1<small>Veri Girişi</small></span>
+      <span class="step">2<small>Tahmin</small></span>
+      <span class="step">3<small>Sonuç</small></span>
+    </div>
+  </header>
 
   {% if hata_mesaji %}
-  <div class="uyari hata">{{ hata_mesaji }}</div>
+  <div class="alert alert-error" role="alert">
+    <span class="alert-icon" aria-hidden="true">i</span>
+    <span class="alert-body">
+      <strong>Girilen değer izin verilen aralığın dışında. Lütfen bilgilerinizi kontrol ediniz.</strong>
+      <span>{{ hata_mesaji }}</span>
+    </span>
+  </div>
   {% endif %}
 
   {% include "parcali/form.html" %}

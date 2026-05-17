@@ -12,7 +12,7 @@ GECERLI_PAYLOAD = {
     "glucose": 148,
     "blood_pressure": 72,
     "skin_thickness": 35,
-    "insulin": 0,
+    "insulin": 120,
     "bmi": 33.6,
     "diabetes_pedigree_function": 0.627,
     "age": 50,
@@ -69,3 +69,4 @@ def test_predict_gecersiz_veride_422_donmeli() -> None:
     yanit = client.post("/predict", json=gecersiz)
 
     assert yanit.status_code == 422
+    assert yanit.json()["detail"] == "Yaş 21 ile 90 arasında olmalıdır."

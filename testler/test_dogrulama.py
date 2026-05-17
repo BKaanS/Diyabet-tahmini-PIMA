@@ -15,7 +15,7 @@ def test_tahmin_girdisi_gecerli_veriyi_kabul_etmeli() -> None:
         glucose=148,
         blood_pressure=72,
         skin_thickness=35,
-        insulin=0,
+        insulin=120,
         bmi=33.6,
         diabetes_pedigree_function=0.627,
         age=50,
@@ -32,7 +32,7 @@ def test_tahmin_girdisi_gecersiz_yasi_reddetmeli() -> None:
             glucose=148,
             blood_pressure=72,
             skin_thickness=35,
-            insulin=0,
+            insulin=120,
             bmi=33.6,
             diabetes_pedigree_function=0.627,
             age=10,
@@ -40,6 +40,23 @@ def test_tahmin_girdisi_gecersiz_yasi_reddetmeli() -> None:
 
     ilk = hata.value.errors()[0]
     assert ilk["loc"] == ("age",)
+
+
+def test_tahmin_girdisi_gercekci_olmayan_sifir_klinik_degerleri_reddetmeli() -> None:
+    with pytest.raises(ValidationError) as hata:
+        TahminGirdisi(
+            pregnancies=2,
+            glucose=148,
+            blood_pressure=72,
+            skin_thickness=35,
+            insulin=0,
+            bmi=33.6,
+            diabetes_pedigree_function=0.627,
+            age=50,
+        )
+
+    ilk = hata.value.errors()[0]
+    assert ilk["loc"] == ("insulin",)
 
 
 def test_tahmin_ciktisi_gecersiz_olasiligi_reddetmeli() -> None:

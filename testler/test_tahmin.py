@@ -13,7 +13,7 @@ GECERLI_GIRDI = TahminGirdisi(
     glucose=148,
     blood_pressure=72,
     skin_thickness=35,
-    insulin=0,
+    insulin=120,
     bmi=33.6,
     diabetes_pedigree_function=0.627,
     age=50,
@@ -54,7 +54,7 @@ def test_tek_ornek_tahmin_eksik_alanli_dictte_hata_vermeli() -> None:
         "glucose": 148,
         "blood_pressure": 72,
         "skin_thickness": 35,
-        "insulin": 0,
+        "insulin": 120,
         "bmi": 33.6,
         "diabetes_pedigree_function": 0.627,
     }
