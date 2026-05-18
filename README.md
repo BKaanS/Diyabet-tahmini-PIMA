@@ -110,7 +110,7 @@ Model, kalibre edilmiş olasılık değerini üç seviyeli risk kategorisine dö
 ```text
 uygulama/              FastAPI uygulaması, API rotaları, servisler, şemalar ve arayüz dosyaları
 makine_ogrenmesi/      Veri, modelleme kaynak kodları, artifact dosyaları ve raporlar
-betikler/              Eğitim, artifact üretimi, değerlendirme ve raporlama betikleri
+betikler/              Güncel nihai model artifact üretim betiği
 testler/               Pytest tabanlı testler
 dokumanlar/            Proje dokümanları ve değerlendirme çıktıları
 dagitim/               Dağıtım yapılandırmaları
@@ -191,7 +191,7 @@ Başlıca dönüş alanları:
 
 ```json
 {
-  "detail": "Glikoz 50 ile 300 mg/dL arasında olmalıdır."
+  "detail": "Girilen değer izin verilen aralığın dışında. Lütfen bilgilerinizi kontrol ediniz."
 }
 ```
 

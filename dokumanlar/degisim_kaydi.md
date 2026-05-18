@@ -1,46 +1,34 @@
 # Değişim Kaydı
 
-Bu dosya, proje kapsamını etkileyen önemli kararları kronolojik olarak izlemek için tutulur.
+Bu dosya, proje kapsamını etkileyen önemli kararların kısa izini tutar.
+
+## 2026-05-18
+
+### Teslim Öncesi Temizlik
+
+- Eski XGBoost/veri artırmadan optimizasyon dokümanı kaldırıldı.
+- Resmi skor tablosu güncel ExtraTrees üretim artifactine göre yeniden yazıldı.
+- API sözleşmesi, test senaryoları ve risk kaydı güncel klinik aralık doğrulamalarıyla eşitlendi.
+- Artifact üretim özetindeki yerel mutlak dosya yolları göreli proje yollarına çevrildi.
+- `.gitignore` içine geçici klasör ve bozuk git yedek klasörü kuralları eklendi.
+- `pyproject.toml` içine ruff ve mypy yapılandırması eklendi.
+
+## 2026-05-17
+
+### Nihai Modelin Taşınması
+
+- Nihai üretim modeli `pima_1000_1000_extra_trees_v1` koduyla asıl projeye alındı.
+- Dengelenmiş PIMA sentetik eğitim seti ve metadata dosyaları temiz adlarla eklendi.
+- Pickle bağımlılığında deneysel modül adı yerine `makine_ogrenmesi/kaynak/pima_özellik_dönüşümleri.py` kullanılmaya başlandı.
+- Claude ile yenilenen arayüz, favicon ve sonuç sayfası asıl projeye taşındı.
 
 ## 2026-04-05
 
-### Risk Kategorisi Standardizasyonu
+### İlk Prototip Standardizasyonu
 
-- Risk kategorileri tekrar 3 seviyeye indirildi.
-- Yeni sabit aralıklar:
-  - `%0 - %33`: `dusuk`
-  - `%33 - %66`: `orta`
-  - `%66 - %100`: `yuksek`
-- Etkilenen katmanlar birlikte güncellendi:
-  - servis mantığı
-  - şema doğrulamaları
-  - UI (rozet, pie, doğrusal bar etiket/segmentleri)
-  - testler
-  - README ve `esik_yapilandirmasi.json`
-
-### Değerlendirme Raporunda Tutarlılık İyileştirmesi
-
-- Değerlendirme özetinde “testte öne çıkan model” ve “deploy için seçilen model” ayrımı netleştirildi.
-- “En iyi model seçimi” için kullanılan kriter çıktıda açık biçimde belirtilir hale getirildi.
-- `%90+ accuracy` hedefinin sağlanamadığı durumda, proje planındaki B planına uygun gerekçe metni rapora eklendi.
-
-### Dokümantasyon Tamamlama
-
-- Daha önce boş olan aşağıdaki dosyalar içeriklendirilerek izlenebilir hale getirildi:
-  - `dokumanlar/proje_kapsami.md`
-  - `dokumanlar/risk_kaydi.md`
-  - `dokumanlar/degisim_kaydi.md`
-  - `dokumanlar/api_sozlesmesi.md`
-
-### Sunum Hazırlık Paketi
-
-- Sunum sürecini uçtan uca desteklemek için aşağıdaki yeni dokümanlar eklendi:
-  - `dokumanlar/sunum_iskeleti.md`
-  - `dokumanlar/canli_demo_akisi.md`
-  - `dokumanlar/soru_cevap_kartlari.md`
-  - `dokumanlar/prova_kontrol_listesi.md`
-- Sunum akışı, canlı demo senaryoları, soru-cevap kartları ve prova kabul kriterleri tek pakette standartlaştırıldı.
+- Risk kategorileri düşük, orta ve yüksek olmak üzere üç seviyede standardize edildi.
+- FastAPI endpointleri, temel testler ve proje dokümanları oluşturuldu.
 
 ## Not
 
-Bu değişim kaydı, kod deposundaki commit geçmişinin yerine geçmez; kapsam ve karar izi için tamamlayıcı belgedir.
+Bu değişim kaydı commit geçmişinin yerine geçmez; karar ve kapsam izini kısa biçimde tamamlar.

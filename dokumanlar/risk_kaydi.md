@@ -1,19 +1,16 @@
 # Risk Kaydı
 
-Bu doküman, proje yürütümü sırasında ortaya çıkan teknik ve operasyonel riskleri takip etmek için hazırlanmıştır.
+Bu doküman, teslim edilecek akademik prototip için kalan teknik ve metodolojik riskleri özetler.
 
-| Risk No | Risk Tanımı | Olasılık | Etki | Güncel Durum | Aksiyon / B Planı |
-|---|---|---|---|---|---|
-| R-01 | Performans hedeflerinin (`%90+ accuracy`) tamamının karşılanamaması | Orta | Yüksek | Açık | Değerlendirme tek metrik yerine AUC/F1/kalibrasyon dengesi ile yapılır. Sunumda hedef sapması teknik gerekçesiyle açıkça belirtilir. |
-| R-02 | “En iyi model” raporu ile deploy metadata arasında tutarsızlık algısı | Orta | Yüksek | Azaltıldı | Değerlendirme çıktısında testte öne çıkan model ile deploy modeli ayrı alanlarda raporlanır; seçim kriteri ayrıca yazılır. |
-| R-03 | Dokümantasyon boş veya güncel kodla uyumsuz kalabilir | Yüksek | Orta | Azaltıldı | `proje_kapsami`, `risk_kaydi`, `degisim_kaydi`, `api_sozlesmesi` düzenli güncellenir; her kapsam değişikliği sonrası doküman kontrolü zorunlu tutulur. |
-| R-04 | Risk kategorisi kuralının kod, UI ve artifact arasında farklılaşması | Orta | Yüksek | Azaltıldı | Kural tek kaynak olarak servis ve artifact tarafında sabitlenir; testler ve README aynı aralıklarla tutulur. |
-| R-05 | Demo sırasında ortam kaynaklı hata (port çakışması, bağımlılık eksikliği) | Orta | Orta | Açık | Demo öncesi kontrol listesi: `pip install -r requirements.txt`, `pytest -q`, `lsof -i :8000`, `GET /health`. |
-| R-06 | SHAP çıktılarının son kullanıcı tarafından zor anlaşılması | Düşük | Orta | Açık | Sonuç ekranında kısa açıklama metni ve ilk 3 etken sade dille gösterilir. |
-| R-07 | Gerçek kullanıcı geri bildirimi sayısının hedefin altında kalması | Orta | Orta | Açık | En az 20 çekirdek senaryo ile teknik doğrulama sürdürülür; kullanıcı geri bildirimi toplanan sayıya göre nitel raporlama derinleştirilir. |
+| Risk No | Risk Tanımı | Olasılık | Etki | Güncel Durum | Aksiyon / Not |
+| --- | --- | --- | --- | --- | --- |
+| R-01 | Modelin klinik genellenebilirliğinin yalnız PIMA tabanlı veriyle sınırlı kalması | Orta | Yüksek | Açık | Sunum ve README içinde sistemin tanı aracı olmadığı açıkça belirtilir. |
+| R-02 | Sentetik veri nedeniyle doğrulama şişmesi algısı | Orta | Yüksek | Azaltıldı | Source ID kontrollü GroupCV sonucu ve maksimum source intersection = 0 bilgisi raporlanır. |
+| R-03 | Web arayüzüne gerçekçi olmayan klinik değer girilmesi | Düşük | Orta | Azaltıldı | API ve form alanlarında aynı aralık kuralları uygulanır. |
+| R-04 | SHAP açıklamalarının son kullanıcı tarafından klinik neden-sonuç gibi yorumlanması | Orta | Orta | Azaltıldı | Sonuç sayfasında açıklamaların model katkısı olduğu vurgulanır. |
+| R-05 | Lokal ortam ve port çakışmaları nedeniyle demo kesintisi | Orta | Orta | Açık | Demo öncesi `pytest -q`, `/health` ve alternatif port kontrolü yapılır. |
+| R-06 | Üretim seviyesi güvenlik kontrollerinin prototipte bulunmaması | Orta | Orta | Kabul Edildi | API key, rate limit ve güvenlik headerları akademik prototip kapsamı dışında bırakılmıştır. |
 
-## Risk İzleme Kuralı
+## İzleme Kuralı
 
-- Yüksek etki içeren açık riskler, her sprint sonunda yeniden değerlendirilir.
-- “Azaltıldı” durumuna geçen risklerin kanıtı ilgili rapor/doküman bağlantısıyla kayıt altına alınır.
-- Kritik risklerde kapsam daraltma kararı alınırsa gerekçe `degisim_kaydi.md` dosyasına işlenir.
+Teslim öncesinde açık kalan riskler sunumda sınırlılık olarak anlatılmalı; model çıktısının klinik karar yerine farkındalık amaçlı olduğu özellikle belirtilmelidir.

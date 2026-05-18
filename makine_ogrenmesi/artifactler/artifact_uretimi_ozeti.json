@@ -1,11 +1,11 @@
 {
   "model_kodu": "pima_1000_1000_extra_trees_v1",
   "dosyalar": {
-    "en_iyi_pipeline": "/Users/beratkaanseven/Desktop/VSCoding/Diyabet_Projesi/diyabet_risk_tahmini/makine_ogrenmesi/artifactler/en_iyi_pipeline.joblib",
-    "kalibrator": "/Users/beratkaanseven/Desktop/VSCoding/Diyabet_Projesi/diyabet_risk_tahmini/makine_ogrenmesi/artifactler/kalibrator.joblib",
-    "esik_yapilandirmasi": "/Users/beratkaanseven/Desktop/VSCoding/Diyabet_Projesi/diyabet_risk_tahmini/makine_ogrenmesi/artifactler/esik_yapilandirmasi.json",
-    "ozellik_sirasi": "/Users/beratkaanseven/Desktop/VSCoding/Diyabet_Projesi/diyabet_risk_tahmini/makine_ogrenmesi/artifactler/ozellik_sirasi.json",
-    "metrik_ozeti": "/Users/beratkaanseven/Desktop/VSCoding/Diyabet_Projesi/diyabet_risk_tahmini/makine_ogrenmesi/artifactler/metrik_ozeti.json",
-    "model_metadata": "/Users/beratkaanseven/Desktop/VSCoding/Diyabet_Projesi/diyabet_risk_tahmini/makine_ogrenmesi/artifactler/model_metadata.json"
+    "en_iyi_pipeline": "makine_ogrenmesi/artifactler/en_iyi_pipeline.joblib",
+    "kalibrator": "makine_ogrenmesi/artifactler/kalibrator.joblib",
+    "esik_yapilandirmasi": "makine_ogrenmesi/artifactler/esik_yapilandirmasi.json",
+    "ozellik_sirasi": "makine_ogrenmesi/artifactler/ozellik_sirasi.json",
+    "metrik_ozeti": "makine_ogrenmesi/artifactler/metrik_ozeti.json",
+    "model_metadata": "makine_ogrenmesi/artifactler/model_metadata.json"
   }
 }

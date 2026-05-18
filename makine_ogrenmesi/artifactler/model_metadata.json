@@ -2,7 +2,7 @@
   "proje_adi": "diyabet_risk_tahmini",
   "veri_seti": "PIMA 1000/1000 sentetik eğitim seti",
   "problem_tipi": "binary_classification",
-  "olusturulma_zamani_utc": "2026-05-15T09:10:35.871229+00:00",
+  "olusturulma_zamani_utc": "2026-05-17T20:41:50.296635+00:00",
   "python_surumu": "3.13.0",
   "sklearn_surumu": "1.8.0",
   "model_adi": "ExtraTrees",

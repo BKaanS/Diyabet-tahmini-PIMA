@@ -69,4 +69,4 @@ def test_predict_gecersiz_veride_422_donmeli() -> None:
     yanit = client.post("/predict", json=gecersiz)
 
     assert yanit.status_code == 422
-    assert yanit.json()["detail"] == "Yaş 21 ile 90 arasında olmalıdır."
+    assert yanit.json()["detail"] == "Girilen değer izin verilen aralığın dışında. Lütfen bilgilerinizi kontrol ediniz."

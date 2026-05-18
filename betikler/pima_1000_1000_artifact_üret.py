@@ -205,7 +205,13 @@ def main() -> None:
         },
     )
 
-    _json_yaz(ARTIFACT_KLASORU / "artifact_uretimi_ozeti.json", {"model_kodu": MODEL_KODU, "dosyalar": {k: str(v) for k, v in kaydedilenler.items()}})
+    _json_yaz(
+        ARTIFACT_KLASORU / "artifact_uretimi_ozeti.json",
+        {
+            "model_kodu": MODEL_KODU,
+            "dosyalar": {k: str(v.relative_to(PROJE_KOKU)) for k, v in kaydedilenler.items()},
+        },
+    )
 
     print("PIMA 1000/1000 üretim artifactleri oluşturuldu.")
     print(f"Model kodu: {MODEL_KODU}")

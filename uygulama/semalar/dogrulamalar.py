@@ -5,6 +5,8 @@ from __future__ import annotations
 import math
 
 
+ARALIK_DISI_MESAJI = "Girilen değer izin verilen aralığın dışında. Lütfen bilgilerinizi kontrol ediniz."
+
 ALAN_ARALIKLARI: dict[str, tuple[float, float]] = {
     "pregnancies": (0, 17),
     "glucose": (50, 300),
@@ -47,14 +49,7 @@ def _sayi_metni(deger: float) -> str:
 
 def alan_aralik_mesaji(alan_adi: str) -> str:
     """Alan için kullanıcıya gösterilecek temiz aralık mesajını üretir."""
-    alt_sinir, ust_sinir = ALAN_ARALIKLARI[alan_adi]
-    alan_etiketi = ALAN_GORUNUR_ADLARI.get(alan_adi, alan_adi)
-    birim = ALAN_BIRIMLERI.get(alan_adi, "")
-    birim_metni = f" {birim}" if birim else ""
-    return (
-        f"{alan_etiketi} {_sayi_metni(alt_sinir)} ile {_sayi_metni(ust_sinir)}"
-        f"{birim_metni} arasında olmalıdır."
-    )
+    return ARALIK_DISI_MESAJI
 
 
 def dogrulama_hatalarini_ozetle(hatalar: list[dict]) -> str:
@@ -69,6 +64,8 @@ def dogrulama_hatalarini_ozetle(hatalar: list[dict]) -> str:
         return f"{alan_etiketi} alanı zorunludur."
     if hata_tipi in {"int_parsing", "float_parsing", "int_type", "float_type"}:
         return f"{alan_etiketi} sayısal bir değer olmalıdır."
+    if hata_tipi in {"greater_than_equal", "less_than_equal", "greater_than", "less_than"}:
+        return ARALIK_DISI_MESAJI
     if alan in ALAN_ARALIKLARI:
         return alan_aralik_mesaji(alan)
 
